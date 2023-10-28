@@ -13,7 +13,7 @@ import lombok.Data;
 @Table(name = "colors")
 public class Colors {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "colors_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "colors_id_seq")
     int id;
 
     @Column(name = "colortype")
