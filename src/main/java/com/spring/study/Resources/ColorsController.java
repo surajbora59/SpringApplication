@@ -1,4 +1,4 @@
-package com.spring.study.Controller;
+package com.spring.study.Resources;
 
 import java.util.List;
 
@@ -27,9 +27,9 @@ public class ColorsController {
     @Autowired
     private RequestHandler requestHandler;
     @Autowired
-    GetColorsImpl getColorsImpl;
+    private GetColorsImpl getColorsImpl;
     @Autowired
-    AddColorsImpl addColorsImpl;
+    private AddColorsImpl addColorsImpl;
     @GetMapping("/getColors")
     public ResponseEntity<GenericResponse> getColors(@RequestParam(name = "colorType",required = false) String colorType,
                                                      @RequestParam(name = "id",required = false) Integer colorId) {
