@@ -9,12 +9,15 @@ import com.spring.study.Response.ColorsResponse;
 import com.spring.study.Response.GenericResponse;
 import com.spring.study.Service.Impl.AddColorsImpl;
 import com.spring.study.Service.Impl.GetColorsImpl;
+import com.spring.study.Service.Impl.UpdateColorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +33,8 @@ public class ColorsController {
     private GetColorsImpl getColorsImpl;
     @Autowired
     private AddColorsImpl addColorsImpl;
+    @Autowired
+    private UpdateColorServiceImpl updateColorServiceImpl;
     @GetMapping("/getColors")
     public ResponseEntity<GenericResponse> getColors(@RequestParam(name = "colorType",required = false) String colorType,
                                                      @RequestParam(name = "id",required = false) Integer colorId) {
@@ -43,5 +48,19 @@ public class ColorsController {
     public ResponseEntity<GenericResponse> addColors(@RequestBody AddColorRequest addColorRequest) {
         GenericResponse response =  addColorsImpl.addColors(addColorRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PutMapping("/updateColor")
+    public ResponseEntity<GenericResponse> updateColors(@RequestBody ColorsRequest colorsRequest){
+        ColorsRequest request = requestHandler.updateColorRequest(colorsRequest);
+        GenericResponse response = updateColorServiceImpl.updateColor(request);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @DeleteMapping("/deleteColor")
+    public ResponseEntity<GenericResponse> deleteColors(@RequestParam(name = "id",required = true) Integer colorId){
+        Integer id = requestHandler.deleteColorRequest(colorId);
+        GenericResponse response = updateColorServiceImpl.deleteColor(id);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
