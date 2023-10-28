@@ -1,4 +1,4 @@
-package com.spring.study.service;
+package com.spring.study.Service;
 
 import com.spring.study.Request.AddColorRequest;
 import com.spring.study.Response.GenericResponse;

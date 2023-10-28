@@ -1,10 +1,10 @@
-package com.spring.study.service.Impl;
+package com.spring.study.Service.Impl;
 
 import com.spring.study.Entity.Colors;
 import com.spring.study.Repository.ColorRepository;
 import com.spring.study.Request.AddColorRequest;
 import com.spring.study.Response.GenericResponse;
-import com.spring.study.service.AddColors;
+import com.spring.study.Service.AddColors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

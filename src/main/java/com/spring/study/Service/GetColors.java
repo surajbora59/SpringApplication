@@ -1,4 +1,4 @@
-package com.spring.study.service;
+package com.spring.study.Service;
 
 import java.util.List;
 
