@@ -46,7 +46,7 @@ public class ColorsController {
         return ResponseEntity.ok().body(genericResponse);
     }
 
-    @PostMapping("/addColors")
+    @PostMapping("/addColor")
     public ResponseEntity<GenericResponse> addColors(@RequestBody AddColorRequest addColorRequest) {
         AddColorRequest request = requestHandler.addColorsRequest(addColorRequest.getColorType());
         GenericResponse response =  colorsServiceImpl.addColors(request);
