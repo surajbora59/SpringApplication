@@ -30,7 +30,7 @@ public class ColorsController {
     private RequestHandler requestHandler;
     @Autowired
     private ColorsServiceImpl colorsServiceImpl;
-    @GetMapping("/getColors")
+    @GetMapping(value = "/getColors", produces = "application/json")
     public ResponseEntity<GenericResponse> getColors(@RequestParam(name = "colorType",required = false) String colorType,
                                                      @RequestParam(name = "id",required = false) Integer colorId) {
         ColorsRequest request = requestHandler.getColorsRequest(colorType, colorId);
@@ -46,21 +46,21 @@ public class ColorsController {
         return ResponseEntity.ok().body(genericResponse);
     }
 
-    @PostMapping("/addColor")
+    @PostMapping(value = "/addColor", produces = "application/json", consumes = "application/json")
     public ResponseEntity<GenericResponse> addColors(@RequestBody AddColorRequest addColorRequest) {
         AddColorRequest request = requestHandler.addColorsRequest(addColorRequest.getColorType());
         GenericResponse response =  colorsServiceImpl.addColors(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PutMapping("/updateColor")
+    @PutMapping(value = "/updateColor", produces = "application/json", consumes = "application/json")
     public ResponseEntity<GenericResponse> updateColors(@RequestBody ColorsRequest colorsRequest){
         ColorsRequest request = requestHandler.updateColorRequest(colorsRequest);
         GenericResponse response = colorsServiceImpl.updateColor(request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @DeleteMapping("/deleteColor")
+    @DeleteMapping(value = "/deleteColor", produces = "application/json")
     public ResponseEntity<GenericResponse> deleteColors(@RequestParam(name = "id",required = true) Integer colorId){
         Integer id = requestHandler.deleteColorRequest(colorId);
         GenericResponse response = colorsServiceImpl.deleteColor(id);
