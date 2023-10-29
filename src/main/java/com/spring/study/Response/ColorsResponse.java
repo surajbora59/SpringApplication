@@ -1,5 +1,8 @@
 package com.spring.study.Response;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +16,9 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Component
 @Scope("prototype")
-public class ColorsResponse {
+public class ColorsResponse implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private Integer id;
     private String colorType;
 }

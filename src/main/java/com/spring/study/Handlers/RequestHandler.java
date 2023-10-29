@@ -1,5 +1,6 @@
 package com.spring.study.Handlers;
 
+import com.spring.study.Request.AddColorRequest;
 import com.spring.study.Request.ColorsRequest;
 import io.micrometer.common.util.StringUtils;
 import org.slf4j.Logger;
@@ -17,6 +18,9 @@ public class RequestHandler {
     public ColorsRequest getColorsRequest(String colorType, Integer colorId) {
         if (colorId != null) {
             logger.info("colorId is {}", colorId);
+            if(colorId<0){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "id cannot be zero/-ve");
+            }
         }
         if (!StringUtils.isEmpty(colorType)) {
             logger.info("colorType is {}", colorType);
@@ -27,14 +31,14 @@ public class RequestHandler {
         return ColorsRequest.builder().colorType(colorType).id(colorId).build();
     }
 
-    public ColorsRequest addColorsRequest(String colorType) {
+    public AddColorRequest addColorsRequest(String colorType) {
         if (!StringUtils.isEmpty(colorType)) {
             logger.info("colorType is {}", colorType);
         } else {
-            colorType = "";
             logger.error("colorType is null");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "colorType is null");
         }
-        return ColorsRequest.builder().colorType(colorType).build();
+        return AddColorRequest.builder().colorType(colorType).build();
     }
 
     public ColorsRequest updateColorRequest(ColorsRequest colorsRequest){

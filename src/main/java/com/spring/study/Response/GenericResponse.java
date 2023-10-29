@@ -1,5 +1,6 @@
 package com.spring.study.Response;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
@@ -11,7 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class GenericResponse implements Serializable {
-    private  static final long serialVersionUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
     Object meta;
     Object data;
 }
